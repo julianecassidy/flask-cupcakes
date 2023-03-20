@@ -1,5 +1,5 @@
 """Models for Cupcake app."""
- 
+
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
@@ -28,7 +28,7 @@ class Cupcake(db.Model):
 
     flavor = db.Column(
        db.String(30),
-       nullable=False 
+       nullable=False
     )
 
     size = db.Column(
@@ -46,3 +46,14 @@ class Cupcake(db.Model):
         nullable=False,
         default=DEFAULT_IMAGE_URL
     )
+
+    def serialize(self):
+        """serialize properties into dictionary"""
+
+        return {
+            "id": self.id,
+            "flavor": self.flavor,
+            "size": self.size,
+            "rating": self.rating,
+            "image": self.image
+        }
