@@ -22,6 +22,13 @@ app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 debug = DebugToolbarExtension(app)
 
+@app.get('/')
+def show_homepage():
+    """Returns render template for homepage"""
+
+    return render_template('homepage.html')
+
+
 @app.get('/api/cupcakes')
 def get_all_cupcakes():
     """Returns JSON {cupcakes: [{id, flavor, size, rating, image}, ...]}"""
@@ -70,14 +77,14 @@ def update_cupcake_info(cupcake_id):
     cupcake.flavor = request.json.get('flavor', cupcake.flavor)
     cupcake.size = request.json.get('size', cupcake.size)
     cupcake.rating = request.json.get('rating', cupcake.rating)
-    
+
     if not request.json['image']:
         cupcake.image = DEFAULT_IMAGE_URL
     else:
         cupcake.image = request.json.get('image', cupcake.image)
 
     db.session.commit()
-    
+
     return (jsonify(cupcake=cupcake.serialize()))
 
 
@@ -85,7 +92,7 @@ def update_cupcake_info(cupcake_id):
 def delete_cupcake(cupcake_id):
     """Delete a cupcake from databae and return JSON
     ex. {deleted: [cupcake-id]}
-    or 404 if cupcake not found""" 
+    or 404 if cupcake not found"""
 
     cupcake = Cupcake.query.get_or_404(cupcake_id)
 

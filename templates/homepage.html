@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+
+{% block title %} Cupcakes {% endblock %}
+
+{% block content %}
+
+<ul id="cupcake-list">
+
+</ul>
+
+<form action="/api/cupcakes" method="POST">
+  <label for="cupcake-flavor">Flavor</label>
+  <input name="cupcake-flavor" placeholder="Enter Flavor">
+
+  <label for="cupcake-size">Size</label>
+  <input name="cupcake-size" placeholder="Enter Size">
+
+  <label for="cupcake-rating">Rating</label>
+  <input name="cupcake-rating" placeholder="Enter Rating">
+
+  <label for="cupcake-image">Image</label>
+  <input name="cupcake-image" placeholder="Enter Image">
+
+  <button type="submit">submit</button>
+</form>
+
+
+
+{% endblock %}
